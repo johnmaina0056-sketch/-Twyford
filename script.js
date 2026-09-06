@@ -21,8 +21,8 @@ const products=[
 ];
 const labels={floor:"FLOOR TILES",wall:"WALL TILES",accessories:"TILE ACCESSORIES",fixtures:"BATHROOM FIXTURES"};
 function card(p,i){
-  const imageMap={"twyford-kenya-tiles":"assets/twyford-kenya-tiles.jpg","epoxy-floor-coating":"assets/epoxy-floor-coating.jpg","cabros":"assets/concretes-cabros.jpg"};
-  const image=imageMap[p[0]]||`assets/${p[0]}.jpg`;
+  const imageMap={"twyford-kenya-tiles":"twyford-kenya-tiles.jpg","epoxy-floor-coating":"epoxy-floor-coating.jpg","cabros":"concretes-cabros.jpg"};
+  const image=imageMap[p[0]]||`${p[0]}.jpg`;
   const price=`KSh ${p[3]} <small>starting</small>`;
   const description=p[2].replace(/\n/g,"<br>");
   return `<article class="product-card ${i===2?'featured':''}"><img src="${image}" alt="${p[1]}"><div class="info"><span class="tag">${labels[p[4]]}</span><h3>${p[1]}</h3><p>${description}</p><div class="price">${price}</div><button class="buy" onclick="buy('${p[1]}')">🛒 BUY NOW</button></div></article>`
