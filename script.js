@@ -33,3 +33,25 @@ const sp=document.querySelector("#shopProducts"); let shown=12;
 function renderShop(){if(!sp)return;const q=(document.querySelector("#search")?.value||"").toLowerCase();const c=document.querySelector("#category")?.value||"all";const filtered=products.filter(p=>(c==="all"||p[4]===c)&&p.slice(1,3).join(" ").toLowerCase().includes(q));sp.innerHTML=filtered.slice(0,shown).map(card).join("");const count=document.querySelector("#count");if(count)count.textContent=`Showing 1–${Math.min(shown,filtered.length)} of ${filtered.length} products`;const load=document.querySelector("#load");if(load)load.style.display=shown<filtered.length?"block":"none"}
 if(sp){renderShop();document.querySelector("#search").addEventListener("input",()=>{shown=12;renderShop()});document.querySelector("#category").addEventListener("change",()=>{shown=12;renderShop()});document.querySelector("#load").addEventListener("click",()=>{shown+=4;renderShop()})}
 function sendMessage(e){e.preventDefault();const n=document.querySelector("#name").value,p=document.querySelector("#phone").value,m=document.querySelector("#message").value;const text=encodeURIComponent(`Hello Twyford Kenya,\nName: ${n}\nPhone: ${p}\nMessage: ${m}`);window.open(`https://wa.me/254762531064?text=${text}`,"_blank");return false}
+
+
+// Mobile navigation
+document.querySelectorAll('.site-header').forEach(header => {
+  const button = header.querySelector('.menu');
+  const nav = header.querySelector('nav');
+  if (!button || !nav) return;
+  button.addEventListener('click', () => {
+    const open = nav.classList.toggle('mobile-open');
+    button.setAttribute('aria-expanded', open ? 'true' : 'false');
+    button.textContent = open ? '✕' : '☰';
+    document.body.classList.toggle('menu-active', open);
+  });
+  nav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      nav.classList.remove('mobile-open');
+      button.setAttribute('aria-expanded', 'false');
+      button.textContent = '☰';
+      document.body.classList.remove('menu-active');
+    });
+  });
+});
